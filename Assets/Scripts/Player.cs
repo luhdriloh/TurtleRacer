@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
     private RaceCar _raceCar;
     private bool _started;
-    private bool _fouled;
     private float _timeSinceGasDrop;
     private bool _gasPressed;
 
@@ -27,7 +25,7 @@ public class Player : MonoBehaviour
         {
             if (_gasPressed == false)
             {
-                Debug.Log("shift speed: " + (Time.time - _timeSinceGasDrop)); 
+                //Debug.Log("shift speed: " + (Time.time - _timeSinceGasDrop)); 
             }
 
             _gasPressed = true;
@@ -53,5 +51,15 @@ public class Player : MonoBehaviour
         {
             _raceCar.ShiftUp();
         }
-	}
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            _raceCar.ShiftDown();
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+    }
 }

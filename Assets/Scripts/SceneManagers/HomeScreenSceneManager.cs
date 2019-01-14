@@ -4,21 +4,29 @@ using UnityEngine.SceneManagement;
 
 public class HomeScreenSceneManager : MonoBehaviour
 {
-    public Text _startGameText;
-    private Color _startcolor;
+    public Button _startButton;
+    public Button _instructionsButton;
+    public Button _funModeButton;
 
     private void Start()
     {
-        _startcolor = _startGameText.color;
+        _startButton.onClick.AddListener(ToLevelSelectMenu);
+        _instructionsButton.onClick.AddListener(ToInstructionMenu);
+        _funModeButton.onClick.AddListener(FunMode);
     }
 
-    private void Update ()
+    private void ToLevelSelectMenu()
     {
-        _startGameText.color = Color.Lerp(_startcolor, Color.gray, Mathf.PingPong(Time.time, 1));
+        SceneManager.LoadScene("LevelSelectScene");
+    }
 
-        if (Input.anyKey)
-        {
-            SceneManager.LoadScene("LevelSelectScene");
-        }
+    private void ToInstructionMenu()
+    {
+        SceneManager.LoadScene("InstructionScene");
+    }
+
+    private void FunMode()
+    {
+        SceneManager.LoadScene("FunScene");
     }
 }

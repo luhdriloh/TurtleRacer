@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class RaceCar : MonoBehaviour
@@ -52,7 +51,7 @@ public class RaceCar : MonoBehaviour
         if (_rpm > _redline)
         {
             force -= 20000;
-            Debug.Log("Went past redline");
+            //Debug.Log("Went past redline");
         }
 
         if (_changedGears)
@@ -66,11 +65,12 @@ public class RaceCar : MonoBehaviour
 
         // update rpm
         Vector2 newVelocity = _rigidbody.velocity.y <= 0 && _gasPressed == false ? Vector2.zero : (Vector2)transform.up * acceleration * Time.deltaTime;
+
         _rigidbody.velocity += newVelocity;
 
         if (_gaugeController != null)
         {
-            _gaugeController.UpdateGauges(_rigidbody.velocity.y, Mathf.Max(_minRpm, _rpm));
+            _gaugeController.UpdateGauges(_rigidbody.velocity.y, Mathf.Max(_minRpm, _rpm), _gearIn);
         }
 
         if (_engineSound != null)
@@ -94,9 +94,18 @@ public class RaceCar : MonoBehaviour
 
     public void ShiftUp()
     {
-        if (_gasPressed == false && _gearIn < _gearRatios.Count)
+        if (_gasPressed == false && _gearIn < _gearRatios.Count - 1)
         {
             _gearIn++;
+            _changedGears = true;
+        }
+    }
+
+    public void ShiftDown()
+    {
+        if (_gasPressed == false && _gearIn + 1 > 1)
+        {
+            _gearIn--;
             _changedGears = true;
         }
     }

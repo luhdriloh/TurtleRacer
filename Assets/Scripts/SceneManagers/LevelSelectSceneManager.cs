@@ -9,6 +9,7 @@ public class LevelSelectSceneManager : MonoBehaviour
     public List<GameObject> _experience;
 
     public LevelSelectInformation _levelSelectInformation;
+    public Button _homeButton;
     public Button _backOneLevelButton;
     public Button _nextLevelButton;
     public Button _playButton;
@@ -27,6 +28,7 @@ public class LevelSelectSceneManager : MonoBehaviour
         _backOneLevelButton.onClick.AddListener(BackOneLevelButtonClicked);
         _nextLevelButton.onClick.AddListener(NextLevelButtonClicked);
         _playButton.onClick.AddListener(OnPlayButtonClicked);
+        _homeButton.onClick.AddListener(OnHomeScreenButtonPressed);
 
         _selectedLevel = 0;
         _numberOfLevels = _listOfLevels.Count;
@@ -44,6 +46,11 @@ public class LevelSelectSceneManager : MonoBehaviour
     {
         _selectedLevel = (_selectedLevel + _numberOfLevels - 1) % _numberOfLevels;
         UpdateLevelInformation();
+    }
+
+    private void OnHomeScreenButtonPressed()
+    {
+        SceneManager.LoadScene("HomeScreen");
     }
 
     private void OnPlayButtonClicked()

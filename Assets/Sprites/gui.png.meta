@@ -5,6 +5,7 @@ TextureImporter:
     21300000: gui_0
     21300002: gui_1
     21300004: gui_2
+    21300006: gui_3
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -146,13 +147,33 @@ TextureImporter:
         width: 32
         height: 31
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: ca1e318bea62b43ec90d8e60da73e152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gui_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70a5cb7149cb142d383528ca1f3bb321
       vertices: []
       indices: 
       edges: []

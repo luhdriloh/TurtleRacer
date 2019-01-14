@@ -5,7 +5,6 @@ public class CameraFunctions : MonoBehaviour
     public Transform _playerTransform;
     private float _zStart;
     private Vector3 _playerOffset;
-    private bool _stopPlayerFollow;
     private float _finishDistance;
 
 	private void Start ()
@@ -13,12 +12,19 @@ public class CameraFunctions : MonoBehaviour
         _zStart = transform.position.z;
         _playerOffset = _playerTransform.position;
 
-        _finishDistance = LevelSelectInformation._levelSelectInformationInstance.GetLevelSelected()._raceDistance;
+        if (LevelSelectInformation._levelSelectInformationInstance != null)
+        {
+            _finishDistance = LevelSelectInformation._levelSelectInformationInstance.GetLevelSelected()._raceDistance;
+        }
+        else
+        {
+            _finishDistance = -1;
+        }
     }
 	
 	private void Update ()
     {
-        if (_playerTransform.position.y >= _finishDistance)
+        if (_finishDistance > 0 && _playerTransform.position.y >= _finishDistance)
         {
             return;
         }

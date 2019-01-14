@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class RoadRecycle : MonoBehaviour
 {
@@ -18,12 +16,20 @@ public class RoadRecycle : MonoBehaviour
         _roadOne = Instantiate(_roadProtoype, Vector3.right * (_playerTransform.position.x - .5f), Quaternion.identity);
         _roadTwo = Instantiate(_roadProtoype, new Vector3(_playerTransform.position.x - .5f, _roadHeight, 0f), Quaternion.identity);
         _roadToPlace = 0;
-        _finishDistance = LevelSelectInformation._levelSelectInformationInstance.GetLevelSelected()._raceDistance;
+
+        if (LevelSelectInformation._levelSelectInformationInstance != null)
+        {
+            _finishDistance = LevelSelectInformation._levelSelectInformationInstance.GetLevelSelected()._raceDistance;
+        }
+        else
+        {
+            _finishDistance = -1;
+        }
     }
 
     private void Update ()
     {
-        if (_playerTransform.position.y >= _finishDistance)
+        if (_finishDistance > 0 && _playerTransform.position.y >= _finishDistance)
         {
             return;
         }

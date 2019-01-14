@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FinishLine : MonoBehaviour
 {
@@ -14,7 +12,14 @@ public class FinishLine : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Opponent"))
+        {
+            if (_anyoneCrossedYet == false)
+            {
+                _anyoneCrossedYet = true;
+            }
+        }
+        else if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             LevelData data = LevelSelectInformation._levelSelectInformationInstance.GetLevelSelected();
 
@@ -31,17 +36,9 @@ public class FinishLine : MonoBehaviour
             float timeToFinish = Time.time - GameController._gamecontroller.RaceStartTime();
 
             float previousBestTime = PlayerPrefs.GetFloat(data._difficulty.ToString(), 0);
-            Debug.Log("previous best time: " + previousBestTime);
             if (previousBestTime <= 0 || timeToFinish < previousBestTime)
             {
                 PlayerPrefs.SetFloat(data._difficulty.ToString(), timeToFinish);
-            }
-        }
-        else if (collision.gameObject.layer == LayerMask.NameToLayer("Opponent"))
-        {
-            if (_anyoneCrossedYet == false)
-            {
-                _anyoneCrossedYet = true;
             }
         }
     }

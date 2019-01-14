@@ -1,17 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EngineSound : MonoBehaviour
 {
     public AudioClip _idle;
-    public AudioClip _low;
-    public AudioClip _med;
     public AudioClip _high;
     public float _maxRpm;
 
     private AudioSource _audioSource;
-    private AudioClip _currentClipIn;
+    private bool _going;
     private float _currentRpm;
     private float _timeDone;
     private float _timeToSilenceEngine;
@@ -20,11 +16,12 @@ public class EngineSound : MonoBehaviour
     {
         _timeToSilenceEngine = 4f;
         _audioSource = GetComponent<AudioSource>();
-	}
+        _going = true;
+    }
 
     public void UpdateRpm(float rpm)
     {
-        if (GameController._gamecontroller._raceDone)
+        if (GameController._gamecontroller != null && GameController._gamecontroller._raceDone)
         {
             if (_timeDone <= Mathf.Epsilon)
             {
@@ -36,12 +33,12 @@ public class EngineSound : MonoBehaviour
             _audioSource.volume = volume;
         }
 
-        if (Mathf.Abs(rpm - _currentRpm) <= Mathf.Epsilon && _currentClipIn != _idle)
+        if (Mathf.Abs(rpm - _currentRpm) <= Mathf.Epsilon && _going)
         {
-            _currentClipIn = _idle;
+            _going = false;
             _audioSource.clip = _idle;
             _audioSource.Play();
-            return;
+            _audioSource.pitch = 1;
         }
 
         if (Mathf.Abs(rpm - _currentRpm) > Mathf.Epsilon)
@@ -49,14 +46,14 @@ public class EngineSound : MonoBehaviour
             // we are accelerating
             float percentMaxRpm = rpm / _maxRpm;
 
-            if (_currentClipIn != _high)
+            if (_going == false)
             {
-                _currentClipIn = _high;
+                _going = true;
                 _audioSource.clip = _high;
                 _audioSource.Play();
             }
 
-            _audioSource.pitch = percentMaxRpm / 1.0f;
+            _audioSource.pitch = Mathf.Max(percentMaxRpm / .75f, .1f);
         }
 
         _currentRpm = rpm;
