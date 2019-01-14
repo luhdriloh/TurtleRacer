@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 965adfc00026e470fb0f555a69208abd, type: 3}
+  m_Name: LevelFive
+  m_EditorClassIdentifier: 
+  _opponentName: Antwan Thibodeaux
+  _difficulty: 5
+  _shiftSpeed: 0.1
+  _minGearShift: 7700
+  _maxGearShift: 7900
+  _reactionTimeMin: 0.05
+  _reactionTimeMax: 0.08
+  _opponentCarColor: {r: 0.6218553, g: 0.11525454, b: 0.6603774, a: 1}
+  _raceDistance: 402.3
+  _wonRace: 0
+  _bestTime: 0
